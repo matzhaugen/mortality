@@ -1,2 +1,9 @@
 notebooks/.ipynb_checkpoints/**
 **.DS_Store
+*.bbl
+*.out
+*.log
+*.aux
+*.gz
+*.blg
+*.xml
