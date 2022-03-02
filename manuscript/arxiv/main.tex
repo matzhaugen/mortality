@@ -17,10 +17,26 @@
 \usepackage{natbib}
 \usepackage{doi}
 
+\newcommand{\insertPdfFig}[3]{
+  \begin{figure}[h]
+  \centering
+  \includegraphics[width=16.4cm]{#1.pdf}
+  \caption{#2}
+  \label{fig:#1}
+  \end{figure}
+}
 
+\newcommand{\insertSmallPdfFig}[3]{
+  \begin{figure}[h]
+  \centering
+  \includegraphics[width=8.4cm]{#1.pdf}
+  \caption{#2}
+  \label{fig:#1}
+  \end{figure}
+}
 
-\title{Detecting outliers in mortality data}
-\graphicspath{{../../figures/}}
+\title{Detecting Outliers in Mortality Data}
+\graphicspath{{../../figures/paper}}
 %\date{September 9, 1985} % Here you can change the date presented in the paper title
 %\date{}          % Or removing it
 
@@ -51,7 +67,7 @@
 % Uncomment to override  the `A preprint' in the header
 %\renewcommand{\headeright}{Technical Report}
 %\renewcommand{\undertitle}{Technical Report}
-\renewcommand{\shorttitle}{Outliers in mortality data}
+\renewcommand{\shorttitle}{Detecting Outliers in Mortality Data}
 
 %%% Add PDF metadata to help others organize their library
 %%% Once the PDF is generated, you can check the metadata with
@@ -77,49 +93,42 @@ pdfkeywords={Mortality, Outliers, Splines, Confidence intervals},
 
 \section{Introduction}
 \lipsum[2]
-\lipsum[3]
+
+\section{Methods}
+\label{sec:methods}
+
+\section{Results}
+\label{sec:results}
 
 
-\section{Headings: first level}
-\label{sec:headings}
+\insertPdfFig{population_rates}{Population in Norway 2001-2022. Data is collected annually at the end of each year and interpolated to a weekly resolution.}
 
-\lipsum[4] See Section \ref{sec:headings}.
+\insertPdfFig{weekly_deaths_variance}{Weekly means and variance for mortality data from 2001-2022, separated into age-brackets of 5 years.}
 
-\subsection{Headings: second level}
-\lipsum[5]
-\begin{equation}
-  \xi _{ij}(t)=P(x_{t}=i,x_{t+1}=j|y,v,w;\theta)= {\frac {\alpha _{i}(t)a^{w_t}_{ij}\beta _{j}(t+1)b^{v_{t+1}}_{j}(y_{t+1})}{\sum _{i=1}^{N} \sum _{j=1}^{N} \alpha _{i}(t)a^{w_t}_{ij}\beta _{j}(t+1)b^{v_{t+1}}_{j}(y_{t+1})}}
-\end{equation}
-
-\subsubsection{Headings: third level}
-\lipsum[6]
-
-\paragraph{Paragraph}
-\lipsum[7]
+\insertSmallPdfFig{norway_gompertz_law_ln_mortality_rates}{Gompertz law of mortality in Norway: Log-transformed death rates plotted against age using a 5-year age bracket. The average age is taken as the observation on the abscissa. A linear trend is fitted with a weighted squared error loss after age 30 and a natural spline with 4 degrees of freedom before age 30.}
 
 
-\section{Examples of citations, figures, tables, references}
-\label{sec:others}
+\insertPdfFig{norway_mortality_rates}{Mortality rates separated into age brackets. Top: Natural-Log-transformed mortality rates. Bottom: Raw mortality rates. Units are different in the y-axis due to the transformation. This is to show both the linear rise in mortality with age and the corresponding change in temporal variance. Notice on the top how variance is lowest in the middle ages.}
 
-\subsection{Citations}
-Citations use \verb+natbib+. The documentation may be found at
-\begin{center}
-  \url{http://mirrors.ctan.org/macros/latex/contrib/natbib/natnotes.pdf}
-\end{center}
 
-Here is an example usage of the two main commands (\verb+citet+ and \verb+citep+): Some people thought a thing \citep{belkin2002using} but other people thought something else \citep{belkin2002using}. Many people have speculated that if we knew exactly why \citet{belkin2002using} thought this\dots
+\insertPdfFig{norway_ln_mort_rate_2001_2021}{Log-transformed mortality rate for people over 65 years in Norway after age-standardization, using annual population in 5-year age brackets. A trend is added with two splines one for decadal trends (4 degrees of freedom) and one for seasonal trends (7 degrees of freedom). A constant trend is assumed in the years 2020-2021.}
 
-\subsection{Figures}
-\lipsum[10]
-See Figure \ref{fig:fig1}. Here is how you add footnotes. \footnote{Sample of the first footnote.}
-\lipsum[11]
 
-\begin{figure}
-  \centering
-  \includegraphics[width=17.4cm]{norway_excess_deaths_pois.pdf}
-  \caption{This caption would be placed at the side of the figure, rather than below it.}
-  \label{fig:fig1}
-\end{figure}
+\insertPdfFig{detrended_mortality}{Histogram of weekly deaths for ages above 65 in Norway, juxtaposed with a Poisson distribution with a mean/variance of 500
+.}
+
+\insertPdfFig{norway_excess_deaths_pois}{Excess deaths for people over 65 years in Norway after age-standardization and detrending with a seasonal and decadal trend. Trends are fitted robustly at the $50^{th}$ quantile, while the confidence interval fits the 97.5\% and the 2.5\% quantiles respectively. Vaccination data is superimposed for the same age group, separated by injection number.}
+
+
+\insertPdfFig{cv_pois_s2008}{Cross-Validated Exceedence Estimates: An estimate of the exceedence fraction of annual observations from 2001-2019 outside the $95^{th}$ confidence band for the training period (blue) and for the out-of-sample hold-out year (in red). Each year is held out in turn while the other years are used to compute the confidence band. Error bars are one standard deviation of the average estimate.}
+
+
+% \begin{figure}
+%   \centering
+%   \includegraphics[width=17.4cm]{norway_excess_deaths_pois.pdf}
+%   \caption{This caption would be placed at the side of the figure, rather than below it.}
+%   \label{fig:fig1}
+% \end{figure}
 
 % \subsection{Tables}
 % See awesome Table~\ref{tab:table}.

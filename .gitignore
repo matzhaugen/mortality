@@ -7,3 +7,5 @@ notebooks/.ipynb_checkpoints/**
 *.gz
 *.blg
 *.xml
+*.fls
+*_latexmk
